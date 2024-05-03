@@ -1,49 +1,50 @@
-#include <iostream>
-#include <algorithm>
+#include<iostream>
+#include<algorithm>
 using namespace std;
 
-int n, m;                       
-int a_array[1000000];           
-int temp;
+long A[100001];
+int N, M;
 
-void binary_search(int x) { //이진탐색알고리즘: 오름차순으로 정렬된 배열을 검색
-    int left = 0, mid = 0, right = n - 1;
+void binary_search(long input) {
+	int left = 0;
+	int right = N - 1;
+	int middle = 0;
 
-    while (left <= right) {
-        mid = (left + right) / 2;
+	while (left <= right) {
+		middle = (left + right) / 2;
+		if (A[middle] == input) {
+			cout <<"1" << '\n';
+			return;
+		}
+		else if (A[middle] < input)
+			left = middle + 1;
+		else
+			right = middle - 1;
+	}
 
-        if (a_array[mid] == x) {
-            cout << 1 << "\n";
-            return;
-        } else if (a_array[mid] > x) {
-            right = mid - 1;
-        } else {
-            left = mid + 1;
-        }
-    }
+	cout<<"0"<<'\n';
+	return;
 
-    cout << 0 << "\n"; //못 찾았을때
-    return;
 }
 
 int main() {
-    ios_base::sync_with_stdio(0); //stream의 입력과 출력동기화 비활성화 
-    cin.tie(0); 
+	ios_base::sync_with_stdio(0); //stream의 입력과 출력동기화 비활성화 
+	cin.tie(0);
 
-    cin >> n;
+	cin >> N;
 
-    for (int i = 0; i < n; i++) {
-        cin >> a_array[i]; //크기 n 배열입력 
-    }
-    
-    sort(a_array, a_array + n);    //오름차순정렬 
-    cin >> m;
+	for (int i = 0; i < N; i++) {
+		cin >> A[i];
+	}
 
-    int x;
-    for (int i = 0; i < m; i++) {
-        cin >> x; //A입력 
-        binary_search(x); //이진탐색알고 호출
-    }
+	sort(A, A + N);
 
-    return 0;
+	cin >> M;
+	long input = 0;
+	for (int i=0; i < M; i++) {
+		cin >> input;
+		binary_search(input);
+	}
+
+	return 0;
 }
