@@ -1,0 +1,34 @@
+//일반 배열로 풀어보려고 했는데 시간초과가 계속 뜹니다.. 
+#include<iostream>
+using namespace std;
+int live[5000] = { 1 };
+
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+
+	int N = 0, k = 0,count=0;
+	cin >> N;
+	cin >> k;
+	int x = 0;
+	for (int i = 0; i < N; i++) {
+		x = 0;
+		count = 0;
+		while (count <= k) {			
+			if (live[x]) {
+				count++;
+				if (count == k) {
+					live[x] = 0;
+					cout << x + 1;
+				}		
+					
+			}
+			x++;
+			if (x > N)
+				x = 0;
+		}
+
+	}
+	return 0;
+}
